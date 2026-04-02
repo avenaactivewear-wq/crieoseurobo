@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crie Seu Robô de IA | Aprenda na Prática com o Claude</title>
+<title>Crie Seu Robô com Claude IA | Automatize seu negócio sem programar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
@@ -12,81 +12,182 @@
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 <style>
 :root{
-  --a:#38bdf8;
-  --a2:#1d4ed8;
-  --bg:#02060f;
-  --t1:#eef4fc;
-  --t2:rgba(210,228,248,.52);
-  --t3:rgba(210,228,248,.28);
-  --t4:rgba(210,228,248,.12);
-  --gb:rgba(255,255,255,.04);
-  --gbd:rgba(255,255,255,.08);
-  --r:14px;--rl:22px;
+  --lime:#c8f135;
+  --lime2:#a8e635;
+  --lime-dim:rgba(200,241,53,.12);
+  --lime-border:rgba(200,241,53,.22);
+  --bg:#0a0a0a;
+  --bg2:#111111;
+  --bg3:#161616;
+  --border:rgba(255,255,255,.08);
+  --border2:rgba(255,255,255,.05);
+  --t1:#ffffff;
+  --t2:rgba(255,255,255,.55);
+  --t3:rgba(255,255,255,.28);
+  --t4:rgba(255,255,255,.10);
+  --glass:rgba(255,255,255,.035);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;overflow-x:hidden;max-width:100vw;}
-body{background:var(--bg);color:var(--t1);font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100vw;line-height:1.5;}
-body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.02;}
-#pc{position:fixed;inset:0;z-index:0;pointer-events:none;}
+body{
+  background:var(--bg);
+  color:var(--t1);
+  font-family:'Inter',-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  font-feature-settings:"ss01" on,"cv01" on,"liga" on;
+  overflow-x:hidden;
+  max-width:100vw;
+  line-height:1.5;
+}
+/* Film grain */
+body::after{
+  content:'';
+  position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.025;
+  mix-blend-mode:overlay;
+}
 
-#hdr{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(2,10,30,.9);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);border-bottom:1px solid rgba(56,189,248,.14);}
-#hdr .inner{max-width:1160px;margin:0 auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;}
-
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-weight:700;border-radius:100px;cursor:pointer;text-decoration:none;border:none;transition:all .28s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden;white-space:nowrap;}
-.bp{background:linear-gradient(130deg,#1d4ed8 0%,#38bdf8 100%);color:#fff;letter-spacing:.02em;box-shadow:0 0 0 1px rgba(56,189,248,.2),0 8px 30px rgba(29,78,216,.4);}
-.bp::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 30%,rgba(255,255,255,.18) 50%,transparent 70%);transform:translateX(-100%);animation:sheen 5s infinite 1s;}
-@keyframes sheen{to{transform:translateX(200%);}}
-.bp:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 0 0 1px rgba(56,189,248,.4),0 16px 40px rgba(29,78,216,.5);}
-
-.g{background:var(--gb);border:1px solid var(--gbd);border-radius:var(--r);}
-.gl{background:rgba(255,255,255,.03);border:1px solid rgba(56,189,248,.1);border-radius:var(--rl);box-shadow:0 0 80px rgba(29,78,216,.12),0 40px 80px rgba(0,0,0,.4);}
-.gs{background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.14);border-radius:10px;}
-
-.bx{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
-.ba{background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.18);color:var(--a);}
-.bw{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--t3);}
-
-.tg{background:linear-gradient(160deg,#fff 15%,rgba(255,255,255,.42) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.ta{background:linear-gradient(130deg,#93c5fd 0%,#38bdf8 60%,#818cf8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-
-.sec{position:relative;z-index:1;}
+/* Layout */
 .wrap{max-width:1160px;margin:0 auto;padding:0 28px;}
 .wm{max-width:960px;margin:0 auto;padding:0 28px;}
-.ws{max-width:700px;margin:0 auto;padding:0 28px;}
+.ws{max-width:680px;margin:0 auto;padding:0 28px;}
+.sec{position:relative;z-index:1;}
 
-.rv{opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);}
+/* Reveal animation */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
 .rv.in{opacity:1;transform:none;}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
 
+/* Float */
 @keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .fl{animation:fl 7s ease-in-out infinite;}
+
+/* Pulse dot */
 @keyframes pd{0%,100%{opacity:1}50%{opacity:.15}}
 .pd{animation:pd 2s ease-in-out infinite;}
-@keyframes taskDone{0%{background:transparent}50%{background:rgba(56,189,248,.04)}100%{background:transparent}}
-@keyframes slideIn{from{opacity:0;transform:translateX(6px)}to{opacity:1;transform:none}}
+
+/* Scan line */
 @keyframes scanLine{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
+@keyframes taskDone{0%{background:transparent}50%{background:rgba(200,241,53,.03)}100%{background:transparent}}
+@keyframes slideIn{from{opacity:0;transform:translateX(6px)}to{opacity:1;transform:none}}
 
-.tkw{overflow:hidden;mask-image:linear-gradient(to right,transparent,black 6%,black 94%,transparent);}
-.tkt{display:inline-flex;animation:tk 38s linear infinite;white-space:nowrap;}
-@keyframes tk{to{transform:translateX(-50%);}}
+/* HEADER */
+#hdr{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(10,10,10,.92);
+  backdrop-filter:blur(40px) saturate(180%);
+  -webkit-backdrop-filter:blur(40px) saturate(180%);
+  border-bottom:1px solid var(--border2);
+}
+#hdr .inner{max-width:1160px;margin:0 auto;padding:12px 28px;display:flex;justify-content:space-between;align-items:center;}
 
-/* TESTIMONIAL CAROUSEL */
-.tc-wrap{overflow:hidden;mask-image:linear-gradient(to right,transparent,black 5%,black 95%,transparent);}
-.tc-track{display:flex;gap:14px;width:max-content;animation:tcroll 40s linear infinite;}
-.tc-track:hover{animation-play-state:paused;}
-@keyframes tcroll{to{transform:translateX(-50%);}}
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:inherit;font-weight:700;border-radius:9999px;cursor:pointer;
+  text-decoration:none;border:none;
+  transition:all .25s cubic-bezier(.16,1,.3,1);
+  position:relative;overflow:hidden;white-space:nowrap;
+}
+.btn-lime{
+  background:var(--lime);
+  color:#0a0a0a;
+  letter-spacing:.01em;
+  box-shadow:0 0 0 1px rgba(200,241,53,.3),0 8px 32px rgba(200,241,53,.2);
+}
+.btn-lime::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 30%,rgba(255,255,255,.22) 50%,transparent 70%);
+  transform:translateX(-100%);animation:sheen 5s infinite 1s;
+}
+@keyframes sheen{to{transform:translateX(200%);}}
+.btn-lime:hover{
+  transform:translateY(-2px) scale(1.02);
+  background:var(--lime2);
+  box-shadow:0 0 0 1px rgba(200,241,53,.5),0 16px 40px rgba(200,241,53,.3);
+}
+.btn-ghost{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--t2);
+  font-weight:500;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,.2);color:#fff;}
 
+/* Cards */
+.card{
+  background:var(--glass);
+  border:1px solid var(--border2);
+  border-radius:16px;
+  transition:border-color .2s ease;
+}
+.card:hover{border-color:rgba(255,255,255,.1);}
+.card-lime{
+  background:rgba(200,241,53,.04);
+  border:1px solid rgba(200,241,53,.14);
+  border-radius:16px;
+}
+.glass{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:0 0 80px rgba(0,0,0,.6),0 40px 80px rgba(0,0,0,.4);
+}
+
+/* Badge / eyebrow */
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 14px;border-radius:9999px;
+  font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+}
+.badge-lime{background:rgba(200,241,53,.08);border:1px solid rgba(200,241,53,.2);color:var(--lime);}
+.badge-dim{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--t3);}
+
+/* Gradient text */
+.tg{
+  background:linear-gradient(160deg,#fff 20%,rgba(255,255,255,.45) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.tl{
+  background:linear-gradient(130deg,var(--lime) 0%,var(--lime2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* Accordion */
 .ab{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1);}
 .ab.open{max-height:400px;}
 .ai{transition:transform .3s cubic-bezier(.16,1,.3,1);flex-shrink:0;}
 .ai.open{transform:rotate(180deg);}
 
-::selection{background:rgba(56,189,248,.16);}
+/* Ticker */
+.tkw{overflow:hidden;mask-image:linear-gradient(to right,transparent,black 6%,black 94%,transparent);}
+.tkt{display:inline-flex;animation:tk 40s linear infinite;white-space:nowrap;}
+@keyframes tk{to{transform:translateX(-50%);}}
+
+/* Testimonial carousel */
+.tc-wrap{overflow:hidden;mask-image:linear-gradient(to right,transparent,black 5%,black 95%,transparent);}
+.tc-track{display:flex;gap:14px;width:max-content;animation:tcroll 42s linear infinite;}
+.tc-track:hover{animation-play-state:paused;}
+@keyframes tcroll{to{transform:translateX(-50%);}}
+
+/* Scrollbar */
+::selection{background:rgba(200,241,53,.18);}
 ::-webkit-scrollbar{width:3px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:#0d1a2e;border-radius:2px;}
+::-webkit-scrollbar-thumb{background:#222;border-radius:2px;}
 
-#sb{position:fixed;bottom:0;left:0;right:0;z-index:300;background:rgba(2,8,22,.97);border-top:1px solid rgba(56,189,248,.15);padding:12px 20px 18px;display:none;align-items:center;justify-content:space-between;gap:12px;transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);}
+/* Sticky mobile bar */
+#sb{
+  position:fixed;bottom:0;left:0;right:0;z-index:300;
+  background:rgba(10,10,10,.97);
+  border-top:1px solid rgba(200,241,53,.12);
+  padding:12px 20px 18px;
+  display:none;align-items:center;justify-content:space-between;gap:12px;
+  transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
 #sb.show{transform:translateY(0);}
 
 @media(max-width:639px){
@@ -95,111 +196,124 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;b
   #hdr-cta{display:none!important;}
   #sb{display:flex;}
   .stats-grid{grid-template-columns:repeat(2,1fr)!important;}
-  .stats-grid>div{border-right:none!important;border-bottom:1px solid rgba(255,255,255,.06);}
-  .stats-grid>div:nth-child(odd){border-right:1px solid rgba(255,255,255,.06)!important;}
+  .stats-grid>div{border-right:none!important;border-bottom:1px solid var(--border2);}
+  .stats-grid>div:nth-child(odd){border-right:1px solid var(--border2)!important;}
   .stats-grid>div:nth-child(3),.stats-grid>div:nth-child(4){border-bottom:none!important;}
   .mentor-grid{grid-template-columns:1fr!important;}
   .platform-grid{grid-template-columns:1fr!important;}
-  .platform-grid>div{border-right:none!important;border-bottom:1px solid rgba(255,255,255,.06);}
+  .platform-grid>div{border-right:none!important;border-bottom:1px solid var(--border2);}
   .platform-grid>div:last-child{border-bottom:none!important;}
 }
 </style>
 </head>
 <body>
 
-<canvas id="pc" aria-hidden="true"></canvas>
-
 <!-- HEADER -->
 <header id="hdr">
   <div class="inner">
-    <div class="gs" style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;">
-      <span class="pd" style="width:6px;height:6px;border-radius:50%;background:var(--a);display:inline-block;flex-shrink:0;box-shadow:0 0 8px var(--a);"></span>
-      <span style="font-size:12px;color:var(--t2);font-weight:500;"><span id="cnt">137</span> online agora</span>
+    <div style="display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:9999px;">
+      <span class="pd" style="width:6px;height:6px;border-radius:50%;background:var(--lime);display:inline-block;flex-shrink:0;box-shadow:0 0 8px var(--lime);"></span>
+      <span style="font-size:12px;color:var(--t2);font-weight:500;"><span id="cnt">124</span> online agora</span>
     </div>
     <nav style="display:flex;align-items:center;gap:20px;">
-      <a href="#módulos" class="hide-sm" style="font-size:13px;color:var(--t2);text-decoration:none;font-weight:500;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--t2)'">Módulos</a>
+      <a href="#modulos" class="hide-sm" style="font-size:13px;color:var(--t2);text-decoration:none;font-weight:500;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--t2)'">Modulos</a>
       <a href="#theo" class="hide-sm" style="font-size:13px;color:var(--t2);text-decoration:none;font-weight:500;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--t2)'">Mentor</a>
-      <a id="hdr-cta" href="https://pay.kiwify.com.br/tIgbS7O" class="btn bp" style="font-size:12px;padding:9px 20px;">GARANTIR ACESSO</a>
+      <a id="hdr-cta" href="https://pay.kiwify.com.br/tIgbS7O" class="btn btn-lime" style="font-size:12px;padding:8px 20px;">GARANTIR VAGA</a>
     </nav>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="sec" style="min-height:100svh;display:flex;align-items:center;padding:100px 0 70px;position:relative;overflow:hidden;">
-  <div style="position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(29,78,216,.22) 0%,rgba(56,189,248,.06) 45%,transparent 70%);pointer-events:none;filter:blur(40px);"></div>
+<section class="sec" style="min-height:100svh;display:flex;align-items:center;padding:100px 0 80px;position:relative;overflow:hidden;">
+  <!-- Spotlight radial -->
+  <div style="position:absolute;top:-10%;left:30%;width:700px;height:600px;background:radial-gradient(ellipse,rgba(200,241,53,.06) 0%,transparent 70%);pointer-events:none;filter:blur(60px);"></div>
   <div class="wrap" style="width:100%;">
-    <style>@media(min-width:900px){#hg{grid-template-columns:1fr 1fr!important;gap:72px!important;align-items:center!important;}#hc{text-align:left!important;align-items:flex-start!important;}}</style>
-    <div id="hg" style="display:grid;grid-template-columns:1fr;gap:48px;">
+    <style>
+      @media(min-width:900px){
+        #hg{grid-template-columns:1fr 1fr!important;gap:80px!important;align-items:center!important;}
+        #hc{text-align:left!important;align-items:flex-start!important;}
+      }
+    </style>
+    <div id="hg" style="display:grid;grid-template-columns:1fr;gap:52px;">
 
+      <!-- LEFT: copy -->
       <div id="hc" style="display:flex;flex-direction:column;align-items:center;text-align:center;">
-        <div class="rv" style="margin-bottom:20px;">
-          <span class="bx ba"><iconify-icon icon="solar:gift-bold" style="font-size:11px;"></iconify-icon>Instalador + 5 robôs grátis incluso</span>
+        <div class="rv" style="margin-bottom:22px;">
+          <span class="badge badge-lime">
+            <iconify-icon icon="solar:star-bold" style="font-size:10px;"></iconify-icon>
+            O novo padrao de operacao
+          </span>
         </div>
 
-        <!-- TITULO: max 3 linhas no desktop -->
-        <h1 class="rv d1" style="font-size:clamp(3rem,3.8vw,3.8rem);font-weight:900;letter-spacing:-.055em;line-height:.97;margin-bottom:22px;max-width:520px;">
-          <span class="tg">Aprenda a criar seu Robô de IA</span><br>
-          <span class="ta">do zero.</span>
+        <h1 class="rv d1" style="font-size:clamp(3.2rem,5vw,5rem);font-weight:900;letter-spacing:-.055em;line-height:.96;margin-bottom:24px;max-width:560px;">
+          <span class="tg">Seu negocio lucrando</span><br>
+          <span class="tl">24h por dia</span><br>
+          <span class="tg">sem voce apertar</span><br>
+          <span class="tg">um botao.</span>
         </h1>
 
-        <p class="rv d2" style="font-size:clamp(15px,1.8vw,17px);color:var(--t2);line-height:1.72;max-width:420px;margin-bottom:28px;">
-          Guia 100% prático para criar um assistente de IA com o Claude e automatizar seu negócio. Sem programar, sem mensalidade, resultado na primeira hora.
+        <p class="rv d2" style="font-size:clamp(15px,1.8vw,17px);color:var(--t2);line-height:1.72;max-width:440px;margin-bottom:32px;">
+          Descubra como empresarios estao usando Agentes Autonomos de IA para automatizar vendas, atendimento e gestao. <strong style="color:#fff;font-weight:600;">Sem saber programar e sem custos mensais.</strong>
         </p>
 
-        <div class="rv d3" style="display:flex;flex-direction:column;align-items:inherit;gap:12px;width:100%;max-width:380px;">
-
-          <!-- PRECO RISCADO + BADGE com mais destaque -->
+        <div class="rv d3" style="display:flex;flex-direction:column;align-items:inherit;gap:14px;width:100%;max-width:380px;">
+          <!-- Price -->
           <div style="display:flex;align-items:center;gap:10px;justify-content:inherit;flex-wrap:wrap;">
-            <span style="font-size:16px;color:#ef4444;text-decoration:line-through;font-weight:500;">R&#36; 1.890,00</span>
-            <span style="background:rgba(56,189,248,.14);border:1px solid rgba(56,189,248,.3);color:var(--a);font-size:11px;font-weight:800;padding:4px 12px;border-radius:100px;letter-spacing:.06em;text-transform:uppercase;">96% OFF</span>
+            <span style="font-size:16px;color:rgba(255,255,255,.35);text-decoration:line-through;font-weight:500;">R&#36; 1.890,00</span>
+            <span style="background:rgba(200,241,53,.1);border:1px solid rgba(200,241,53,.25);color:var(--lime);font-size:11px;font-weight:800;padding:4px 12px;border-radius:9999px;letter-spacing:.06em;text-transform:uppercase;">96% OFF</span>
           </div>
-
-          <!-- PRECO PRINCIPAL -->
           <div style="display:flex;align-items:baseline;gap:4px;justify-content:inherit;line-height:1;">
-            <span style="font-size:1.4rem;color:rgba(210,228,248,.6);font-weight:600;align-self:flex-start;padding-top:9px;">R&#36;</span>
-            <span style="font-size:clamp(4.5rem,11vw,5.8rem);font-weight:900;letter-spacing:-.07em;color:#fff;">59</span>
-            <span style="font-size:1.7rem;color:rgba(210,228,248,.6);font-weight:600;align-self:flex-end;padding-bottom:9px;">,90</span>
+            <span style="font-size:1.3rem;color:rgba(255,255,255,.4);font-weight:600;align-self:flex-start;padding-top:9px;">R&#36;</span>
+            <span style="font-size:clamp(4.5rem,11vw,5.5rem);font-weight:900;letter-spacing:-.07em;color:#fff;">59</span>
+            <span style="font-size:1.6rem;color:rgba(255,255,255,.4);font-weight:600;align-self:flex-end;padding-bottom:9px;">,90</span>
           </div>
 
-          <a href="https://pay.kiwify.com.br/tIgbS7O" class="btn bp" style="width:100%;padding:19px 28px;font-size:15px;">
-            QUERO COMEÇAR AGORA
+          <a href="https://pay.kiwify.com.br/tIgbS7O" class="btn btn-lime" style="width:100%;padding:18px 28px;font-size:15px;">
+            QUERO COMECAR AGORA
             <iconify-icon icon="solar:arrow-right-bold" style="font-size:17px;"></iconify-icon>
           </a>
           <div style="display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap;">
-            <span style="font-size:11px;color:var(--t3);display:flex;align-items:center;gap:4px;"><iconify-icon icon="solar:shield-check-bold" style="color:var(--a);font-size:12px;"></iconify-icon>Garantia 7 dias</span>
+            <span style="font-size:11px;color:var(--t3);display:flex;align-items:center;gap:5px;">
+              <iconify-icon icon="solar:shield-check-bold" style="color:var(--lime);font-size:12px;"></iconify-icon>Garantia 7 dias
+            </span>
             <span style="width:2px;height:2px;border-radius:50%;background:var(--t4);"></span>
-            <span style="font-size:11px;color:var(--t3);display:flex;align-items:center;gap:4px;"><iconify-icon icon="solar:infinity-bold" style="color:var(--a);font-size:12px;"></iconify-icon>Acesso vitalício</span>
+            <span style="font-size:11px;color:var(--t3);display:flex;align-items:center;gap:5px;">
+              <iconify-icon icon="solar:infinity-bold" style="color:var(--lime);font-size:12px;"></iconify-icon>Acesso vitalicio
+            </span>
             <span style="width:2px;height:2px;border-radius:50%;background:var(--t4);"></span>
-            <span style="font-size:11px;color:var(--t3);display:flex;align-items:center;gap:4px;"><iconify-icon icon="solar:bolt-circle-bold" style="color:var(--a);font-size:12px;"></iconify-icon>Acesso imediato</span>
+            <span style="font-size:11px;color:var(--t3);display:flex;align-items:center;gap:5px;">
+              <iconify-icon icon="solar:bolt-circle-bold" style="color:var(--lime);font-size:12px;"></iconify-icon>Acesso imediato
+            </span>
           </div>
         </div>
       </div>
 
-      <!-- PANEL -->
-      <div class="rv d2 fl" style="width:100%;max-width:400px;margin:0 auto;">
-        <div style="background:rgba(5,14,35,.9);border:1px solid rgba(56,189,248,.14);border-radius:20px;overflow:hidden;box-shadow:0 0 60px rgba(29,78,216,.2),0 40px 80px rgba(0,0,0,.5);">
-          <div style="padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(56,189,248,.08);background:rgba(56,189,248,.03);">
+      <!-- RIGHT: agent panel -->
+      <div class="rv d2 fl" style="width:100%;max-width:420px;margin:0 auto;">
+        <div style="background:#111;border:1px solid rgba(255,255,255,.09);border-radius:20px;overflow:hidden;box-shadow:0 0 80px rgba(200,241,53,.04),0 40px 80px rgba(0,0,0,.6);">
+          <!-- Panel header -->
+          <div style="padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.02);">
             <div style="display:flex;align-items:center;gap:11px;">
-              <div style="width:32px;height:32px;border-radius:9px;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);display:flex;align-items:center;justify-content:center;">
-                <iconify-icon icon="solar:cpu-bolt-bold" style="font-size:16px;color:var(--a);"></iconify-icon>
+              <div style="width:32px;height:32px;border-radius:9px;background:rgba(200,241,53,.08);border:1px solid rgba(200,241,53,.16);display:flex;align-items:center;justify-content:center;">
+                <iconify-icon icon="solar:cpu-bolt-bold" style="font-size:16px;color:var(--lime);"></iconify-icon>
               </div>
               <div>
-                <div style="font-size:12px;font-weight:700;color:var(--t1);">Seu Robô de IA</div>
-                <div style="font-size:10px;color:var(--a);display:flex;align-items:center;gap:4px;font-weight:500;">
-                  <span class="pd" style="width:5px;height:5px;border-radius:50%;background:var(--a);display:inline-block;box-shadow:0 0 5px var(--a);"></span>Trabalhando agora
+                <div style="font-size:12px;font-weight:700;color:#fff;">PAINEL DE AGENTES</div>
+                <div style="font-size:10px;color:var(--lime);display:flex;align-items:center;gap:4px;font-weight:500;">
+                  <span class="pd" style="width:5px;height:5px;border-radius:50%;background:var(--lime);display:inline-block;box-shadow:0 0 5px var(--lime);"></span>Operando agora
                 </div>
               </div>
             </div>
             <div style="display:flex;gap:5px;">
               <span style="width:8px;height:8px;border-radius:50%;background:#ff453a;opacity:.7;"></span>
               <span style="width:8px;height:8px;border-radius:50%;background:#ffd60a;opacity:.6;"></span>
-              <span style="width:8px;height:8px;border-radius:50%;background:var(--a);box-shadow:0 0 6px var(--a);"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 6px var(--lime);"></span>
             </div>
           </div>
           <div id="auto-list" style="padding:10px;display:flex;flex-direction:column;gap:5px;"></div>
-          <div style="margin:0 10px 10px;padding:10px 14px;background:rgba(56,189,248,.04);border:1px solid rgba(56,189,248,.08);border-radius:10px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="margin:0 10px 10px;padding:10px 14px;background:rgba(200,241,53,.03);border:1px solid rgba(200,241,53,.08);border-radius:10px;display:flex;align-items:center;justify-content:space-between;">
             <span style="font-size:11px;color:var(--t3);">Horas economizadas hoje</span>
-            <span id="time-saved" style="font-size:14px;font-weight:800;color:var(--a);letter-spacing:-.03em;">4h 12min</span>
+            <span id="time-saved" style="font-size:14px;font-weight:800;color:var(--lime);letter-spacing:-.03em;">4h 12min</span>
           </div>
         </div>
       </div>
@@ -209,179 +323,192 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;b
 </section>
 
 <!-- STATS STRIP -->
-<div class="sec" style="border-top:1px solid rgba(56,189,248,.08);border-bottom:1px solid rgba(56,189,248,.08);background:rgba(29,78,216,.06);padding:32px 0;">
+<div class="sec" style="border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);background:rgba(255,255,255,.015);padding:36px 0;">
   <div class="wrap">
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;" class="stats-grid">
-      <div class="rv" style="text-align:center;padding:8px 12px;border-right:1px solid rgba(255,255,255,.06);">
+      <div class="rv" style="text-align:center;padding:8px 12px;border-right:1px solid var(--border2);">
         <div class="sc" style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-.06em;color:#fff;line-height:1;" data-target="750" data-suffix="+">750+</div>
-        <div style="font-size:11px;color:var(--t3);margin-top:4px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;">Alunos</div>
+        <div style="font-size:11px;color:var(--t3);margin-top:5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;">Alunos</div>
       </div>
-      <div class="rv d1" style="text-align:center;padding:8px 12px;border-right:1px solid rgba(255,255,255,.06);">
+      <div class="rv d1" style="text-align:center;padding:8px 12px;border-right:1px solid var(--border2);">
         <div style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-.06em;color:#fff;line-height:1;">4h+</div>
-        <div style="font-size:11px;color:var(--t3);margin-top:4px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;">Economizadas/dia</div>
+        <div style="font-size:11px;color:var(--t3);margin-top:5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;">Economizadas/dia</div>
       </div>
-      <div class="rv d2" style="text-align:center;padding:8px 12px;border-right:1px solid rgba(255,255,255,.06);">
+      <div class="rv d2" style="text-align:center;padding:8px 12px;border-right:1px solid var(--border2);">
         <div style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-.06em;color:#fff;line-height:1;">1h</div>
-        <div style="font-size:11px;color:var(--t3);margin-top:4px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;">1º robô pronto</div>
+        <div style="font-size:11px;color:var(--t3);margin-top:5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;">1 robo pronto</div>
       </div>
       <div class="rv d3" style="text-align:center;padding:8px 12px;">
-        <div style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-.06em;color:var(--a);line-height:1;">R&#36;59</div>
-        <div style="font-size:11px;color:var(--t3);margin-top:4px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;">Investimento único</div>
+        <div style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-.06em;color:var(--lime);line-height:1;">R&#36;59</div>
+        <div style="font-size:11px;color:var(--t3);margin-top:5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;">Investimento unico</div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- TICKER -->
-<div class="sec" style="border-bottom:1px solid rgba(255,255,255,.04);padding:10px 0;background:rgba(56,189,248,.02);">
+<div class="sec" style="border-bottom:1px solid var(--border2);padding:10px 0;background:rgba(200,241,53,.015);">
   <div class="tkw">
     <div class="tkt" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);font-weight:600;">
       <span style="display:inline-flex;align-items:center;gap:32px;padding-right:32px;">
-        <span>Aprenda do zero</span><span style="opacity:.3">·</span><span>Sem programar</span><span style="opacity:.3">·</span><span>Sem mensalidade</span><span style="opacity:.3">·</span><span>Resultado na 1ª hora</span><span style="opacity:.3">·</span><span>Atendimento 24h</span><span style="opacity:.3">·</span><span>Acesso vitalício</span><span style="opacity:.3">·</span><span>+750 alunos</span><span style="opacity:.3">·</span>
+        <span>Aprenda do zero</span><span style="opacity:.3">·</span>
+        <span>Sem programar</span><span style="opacity:.3">·</span>
+        <span>Sem mensalidade</span><span style="opacity:.3">·</span>
+        <span>Resultado na 1ª hora</span><span style="opacity:.3">·</span>
+        <span>Atendimento 24h</span><span style="opacity:.3">·</span>
+        <span>Acesso vitalicio</span><span style="opacity:.3">·</span>
+        <span>+750 alunos</span><span style="opacity:.3">·</span>
       </span>
       <span style="display:inline-flex;align-items:center;gap:32px;padding-right:32px;">
-        <span>Aprenda do zero</span><span style="opacity:.3">·</span><span>Sem programar</span><span style="opacity:.3">·</span><span>Sem mensalidade</span><span style="opacity:.3">·</span><span>Resultado na 1ª hora</span><span style="opacity:.3">·</span><span>Atendimento 24h</span><span style="opacity:.3">·</span><span>Acesso vitalício</span><span style="opacity:.3">·</span><span>+750 alunos</span><span style="opacity:.3">·</span>
+        <span>Aprenda do zero</span><span style="opacity:.3">·</span>
+        <span>Sem programar</span><span style="opacity:.3">·</span>
+        <span>Sem mensalidade</span><span style="opacity:.3">·</span>
+        <span>Resultado na 1ª hora</span><span style="opacity:.3">·</span>
+        <span>Atendimento 24h</span><span style="opacity:.3">·</span>
+        <span>Acesso vitalicio</span><span style="opacity:.3">·</span>
+        <span>+750 alunos</span><span style="opacity:.3">·</span>
       </span>
     </div>
   </div>
 </div>
 
-<!-- O QUE VOCÊ LEVA -->
-<section id="como-funciona" class="sec" style="padding:100px 0;position:relative;overflow:hidden;">
-  <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(29,78,216,.1) 0%,transparent 70%);pointer-events:none;filter:blur(30px);"></div>
+<!-- O QUE VOCE LEVA -->
+<section id="como-funciona" class="sec" style="padding:110px 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:500px;height:400px;background:radial-gradient(ellipse,rgba(200,241,53,.05) 0%,transparent 70%);pointer-events:none;filter:blur(40px);"></div>
   <div class="wm" style="position:relative;z-index:1;">
-    <div class="rv" style="text-align:center;margin-bottom:16px;"><span class="bx bw">O que você leva</span></div>
-    <div class="rv d1" style="text-align:center;margin-bottom:52px;">
-      <h2 style="font-size:clamp(2rem,3.8vw,3.2rem);font-weight:800;letter-spacing:-.05em;line-height:1.06;">
-        <span class="tg">Tudo que você precisa para começar</span><br>
-        <span class="ta">e nada que vai te travar.</span>
+    <div class="rv" style="text-align:center;margin-bottom:14px;"><span class="badge badge-dim">O que voce leva</span></div>
+    <div class="rv d1" style="text-align:center;margin-bottom:56px;">
+      <h2 style="font-size:clamp(2rem,3.8vw,3.2rem);font-weight:900;letter-spacing:-.05em;line-height:1.04;">
+        <span class="tg">Tudo que voce precisa para comecar</span><br>
+        <span class="tl">e nada que vai te travar.</span>
       </h2>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;">
-      <div class="rv g" style="padding:30px 24px;position:relative;overflow:hidden;">
-        <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(56,189,248,.4),transparent);"></div>
-        <iconify-icon icon="solar:book-bold" style="font-size:28px;color:var(--a);margin-bottom:16px;display:block;"></iconify-icon>
-        <h3 style="font-size:15px;font-weight:700;margin-bottom:6px;letter-spacing:-.02em;">7 módulos práticos</h3>
-        <p style="font-size:13px;color:var(--t2);line-height:1.65;">Apostilas diretas ao ponto. Leu e já aplica no mesmo dia.</p>
+
+      <div class="rv card" style="padding:32px 24px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,241,53,.3),transparent);"></div>
+        <iconify-icon icon="solar:book-bold" style="font-size:28px;color:var(--lime);margin-bottom:16px;display:block;"></iconify-icon>
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:7px;letter-spacing:-.02em;">7 modulos praticos</h3>
+        <p style="font-size:13px;color:var(--t2);line-height:1.65;">Apostilas diretas ao ponto. Leu e ja aplica no mesmo dia.</p>
       </div>
-      <div class="rv d1 g" style="padding:30px 24px;position:relative;overflow:hidden;">
-        <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(56,189,248,.3),transparent);"></div>
-        <iconify-icon icon="solar:copy-bold" style="font-size:28px;color:var(--a);margin-bottom:16px;display:block;"></iconify-icon>
-        <h3 style="font-size:15px;font-weight:700;margin-bottom:6px;letter-spacing:-.02em;">Templates prontos</h3>
-        <p style="font-size:13px;color:var(--t2);line-height:1.65;">Prompts testados para copiar, colar e adaptar ao seu negócio.</p>
+
+      <div class="rv d1 card" style="padding:32px 24px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,241,53,.2),transparent);"></div>
+        <iconify-icon icon="solar:copy-bold" style="font-size:28px;color:var(--lime);margin-bottom:16px;display:block;"></iconify-icon>
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:7px;letter-spacing:-.02em;">Templates prontos</h3>
+        <p style="font-size:13px;color:var(--t2);line-height:1.65;">Prompts testados para copiar, colar e adaptar ao seu negocio.</p>
       </div>
-      <div class="rv d2 g" style="padding:30px 24px;position:relative;overflow:hidden;">
-        <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(56,189,248,.3),transparent);"></div>
-        <iconify-icon icon="solar:users-group-rounded-bold" style="font-size:28px;color:var(--a);margin-bottom:16px;display:block;"></iconify-icon>
-        <h3 style="font-size:15px;font-weight:700;margin-bottom:6px;letter-spacing:-.02em;">Comunidade ativa</h3>
-        <p style="font-size:13px;color:var(--t2);line-height:1.65;">Grupo com outros alunos para tirar dúvidas e trocar experiências.</p>
+
+      <div class="rv d2 card" style="padding:32px 24px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,241,53,.2),transparent);"></div>
+        <iconify-icon icon="solar:users-group-rounded-bold" style="font-size:28px;color:var(--lime);margin-bottom:16px;display:block;"></iconify-icon>
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:7px;letter-spacing:-.02em;">Comunidade ativa</h3>
+        <p style="font-size:13px;color:var(--t2);line-height:1.65;">Grupo com outros alunos para tirar duvidas e trocar experiencias.</p>
       </div>
+
     </div>
   </div>
 </section>
 
 <!-- MODULOS -->
-<section id="módulos" class="sec" style="padding:100px 0;background:rgba(5,14,35,.7);position:relative;overflow:hidden;">
-  <div style="position:absolute;right:-10%;top:30%;width:400px;height:400px;background:radial-gradient(circle,rgba(29,78,216,.1),transparent 70%);pointer-events:none;filter:blur(40px);"></div>
+<section id="modulos" class="sec" style="padding:110px 0;background:var(--bg2);position:relative;overflow:hidden;">
+  <div style="position:absolute;right:-5%;top:30%;width:400px;height:400px;background:radial-gradient(circle,rgba(200,241,53,.04),transparent 70%);pointer-events:none;filter:blur(40px);"></div>
   <div class="wm" style="position:relative;z-index:1;">
-    <div class="rv" style="text-align:center;margin-bottom:16px;"><span class="bx bw">Conteudo do curso</span></div>
-    <div class="rv d1" style="text-align:center;margin-bottom:48px;">
-      <h2 style="font-size:clamp(2rem,3.8vw,3.2rem);font-weight:800;letter-spacing:-.05em;line-height:1.06;">
-        <span class="tg">Do zero ao robô funcionando,</span><br>
-        <span class="ta">em 7 módulos práticos.</span>
+    <div class="rv" style="text-align:center;margin-bottom:14px;"><span class="badge badge-dim">Conteudo do curso</span></div>
+    <div class="rv d1" style="text-align:center;margin-bottom:52px;">
+      <h2 style="font-size:clamp(2rem,3.8vw,3.2rem);font-weight:900;letter-spacing:-.05em;line-height:1.04;">
+        <span class="tg">Do zero ao robo funcionando,</span><br>
+        <span class="tl">em 7 modulos praticos.</span>
       </h2>
     </div>
     <div id="mod-list" style="display:grid;gap:7px;"></div>
   </div>
 </section>
 
-<!-- BÔNUS -->
-<section id="bônus" class="sec" style="padding:110px 0;position:relative;overflow:hidden;background:#010409;">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(250,204,21,.04),transparent 70%);pointer-events:none;"></div>
+<!-- BONUS -->
+<section id="bonus" class="sec" style="padding:110px 0;position:relative;overflow:hidden;background:#0a0a0a;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(200,241,53,.03),transparent 70%);pointer-events:none;"></div>
   <div class="ws" style="position:relative;z-index:1;">
 
-    <!-- Header -->
     <div class="rv" style="text-align:center;margin-bottom:14px;">
-      <span style="display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,204,21,.7);">
-        <span style="display:inline-block;width:28px;height:1px;background:rgba(250,204,21,.3);"></span>
-        BÔNUS EXCLUSIVO
-        <span style="display:inline-block;width:28px;height:1px;background:rgba(250,204,21,.3);"></span>
+      <span style="display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--lime);">
+        <span style="display:inline-block;width:28px;height:1px;background:rgba(200,241,53,.3);"></span>
+        BONUS EXCLUSIVO
+        <span style="display:inline-block;width:28px;height:1px;background:rgba(200,241,53,.3);"></span>
       </span>
     </div>
     <div class="rv d1" style="text-align:center;margin-bottom:10px;">
-      <h2 style="font-size:clamp(2.2rem,3.8vw,3.5rem);font-weight:900;letter-spacing:-.05em;line-height:1.06;">
-        <span class="tg">5 robôs prontos.</span><br>
+      <h2 style="font-size:clamp(2.2rem,3.8vw,3.5rem);font-weight:900;letter-spacing:-.05em;line-height:1.04;">
+        <span class="tg">5 robos prontos.</span><br>
         <span class="tg">1 clique para instalar.</span>
       </h2>
     </div>
     <div class="rv d1" style="text-align:center;margin-bottom:56px;">
       <p style="font-size:clamp(14px,1.7vw,16px);color:var(--t2);max-width:460px;margin:0 auto;line-height:1.74;">
-        Comprou o curso, o instalador já vem junto. Configura tudo no seu computador em minutos, sem precisar mexer em nada.
+        Comprou o curso, o instalador ja vem junto. Configura tudo no seu computador em minutos, sem precisar mexer em nada.
       </p>
     </div>
 
-    <!-- Main panel -->
-    <div class="rv d1" style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:24px;overflow:hidden;backdrop-filter:blur(20px);max-width:760px;margin:0 auto;">
-
+    <div class="rv d1 glass" style="overflow:hidden;max-width:760px;margin:0 auto;">
       <!-- Platform strip -->
-      <div class="platform-grid" style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(255,255,255,.06);">
-        <div style="padding:32px 32px;border-right:1px solid rgba(255,255,255,.06);">
+      <div class="platform-grid" style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border2);">
+        <div style="padding:32px;border-right:1px solid var(--border2);">
           <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
-            <div style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <div style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
               <iconify-icon icon="solar:laptop-bold" style="font-size:24px;color:var(--t1);"></iconify-icon>
             </div>
             <div>
-              <div style="font-size:17px;font-weight:800;color:var(--t1);letter-spacing:-.03em;">Mac</div>
-              <div style="font-size:10px;color:rgba(250,204,21,.55);font-family:monospace;margin-top:2px;">install-mac.sh</div>
+              <div style="font-size:17px;font-weight:800;color:#fff;letter-spacing:-.03em;">Mac</div>
+              <div style="font-size:10px;color:var(--lime);font-family:monospace;opacity:.7;margin-top:2px;">install-mac.sh</div>
             </div>
           </div>
-          <p style="font-size:13px;color:var(--t2);line-height:1.8;margin:0;">Abre o Terminal, cola um comando. O instalador configura tudo sozinho.</p>
+          <p style="font-size:13px;color:var(--t2);line-height:1.8;">Abre o Terminal, cola um comando. O instalador configura tudo sozinho.</p>
         </div>
-        <div style="padding:32px 32px;">
+        <div style="padding:32px;">
           <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
-            <div style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <div style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
               <iconify-icon icon="solar:monitor-bold" style="font-size:24px;color:var(--t1);"></iconify-icon>
             </div>
             <div>
-              <div style="font-size:17px;font-weight:800;color:var(--t1);letter-spacing:-.03em;">Windows</div>
-              <div style="font-size:10px;color:rgba(250,204,21,.55);font-family:monospace;margin-top:2px;">install-windows.ps1</div>
+              <div style="font-size:17px;font-weight:800;color:#fff;letter-spacing:-.03em;">Windows</div>
+              <div style="font-size:10px;color:var(--lime);font-family:monospace;opacity:.7;margin-top:2px;">install-windows.ps1</div>
             </div>
           </div>
-          <p style="font-size:13px;color:var(--t2);line-height:1.8;margin:0;">Clique duplo no arquivo. Robôs instalados e prontos em minutos.</p>
+          <p style="font-size:13px;color:var(--t2);line-height:1.8;">Clique duplo no arquivo. Robos instalados e prontos em minutos.</p>
         </div>
       </div>
 
-      <!-- Agents -->
-      <div style="padding:32px 32px;">
-        <div style="font-size:10px;font-weight:700;letter-spacing:.14em;color:rgba(250,204,21,.6);margin-bottom:18px;text-transform:uppercase;">5 robôs já configurados para usar no dia 1</div>
+      <!-- Agents list -->
+      <div style="padding:32px;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--lime);opacity:.7;margin-bottom:18px;text-transform:uppercase;">5 robos ja configurados para usar no dia 1</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;">
-          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;">
-            <iconify-icon icon="solar:chat-round-bold" style="font-size:16px;color:rgba(255,255,255,.35);flex-shrink:0;"></iconify-icon>
-            <span style="font-size:12px;font-weight:600;color:var(--t1);">Atendente 24h</span>
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:10px;">
+            <iconify-icon icon="solar:chat-round-bold" style="font-size:16px;color:var(--t3);flex-shrink:0;"></iconify-icon>
+            <span style="font-size:12px;font-weight:600;color:#fff;">Atendente Vendedor</span>
           </div>
-          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;">
-            <iconify-icon icon="solar:pen-bold" style="font-size:16px;color:rgba(255,255,255,.35);flex-shrink:0;"></iconify-icon>
-            <span style="font-size:12px;font-weight:600;color:var(--t1);">Gerador de Posts</span>
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:10px;">
+            <iconify-icon icon="solar:pen-bold" style="font-size:16px;color:var(--t3);flex-shrink:0;"></iconify-icon>
+            <span style="font-size:12px;font-weight:600;color:#fff;">Gestor de Trafego</span>
           </div>
-          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;">
-            <iconify-icon icon="solar:chart-bold" style="font-size:16px;color:rgba(255,255,255,.35);flex-shrink:0;"></iconify-icon>
-            <span style="font-size:12px;font-weight:600;color:var(--t1);">Analisador de Vendas</span>
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:10px;">
+            <iconify-icon icon="solar:inbox-bold" style="font-size:16px;color:var(--t3);flex-shrink:0;"></iconify-icon>
+            <span style="font-size:12px;font-weight:600;color:#fff;">Suporte N1</span>
           </div>
-          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;">
-            <iconify-icon icon="solar:inbox-bold" style="font-size:16px;color:rgba(255,255,255,.35);flex-shrink:0;"></iconify-icon>
-            <span style="font-size:12px;font-weight:600;color:var(--t1);">Triagem de Mensagens</span>
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:10px;">
+            <iconify-icon icon="solar:chart-bold" style="font-size:16px;color:var(--t3);flex-shrink:0;"></iconify-icon>
+            <span style="font-size:12px;font-weight:600;color:#fff;">Analisador de Dados</span>
           </div>
-          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;">
-            <iconify-icon icon="solar:rocket-bold" style="font-size:16px;color:rgba(255,255,255,.35);flex-shrink:0;"></iconify-icon>
-            <span style="font-size:12px;font-weight:600;color:var(--t1);">Assistente de Negócio</span>
+          <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:10px;">
+            <iconify-icon icon="solar:rocket-bold" style="font-size:16px;color:var(--t3);flex-shrink:0;"></iconify-icon>
+            <span style="font-size:12px;font-weight:600;color:#fff;">Assistente de Negocio</span>
           </div>
         </div>
-        <div style="margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <div style="margin-top:18px;padding-top:18px;border-top:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
           <span style="font-size:12px;color:var(--t3);display:flex;align-items:center;gap:6px;">
             <iconify-icon icon="solar:book-bold" style="font-size:14px;color:var(--t4);"></iconify-icon>
-            Inclui guia visual passo a passo de instalação
+            Inclui guia visual passo a passo de instalacao
           </span>
-          <span style="font-size:11px;font-weight:700;color:rgba(250,204,21,.7);background:rgba(250,204,21,.06);border:1px solid rgba(250,204,21,.14);border-radius:100px;padding:4px 14px;">Incluso no curso - sem custo extra</span>
+          <span style="font-size:11px;font-weight:700;color:var(--lime);background:rgba(200,241,53,.06);border:1px solid rgba(200,241,53,.14);border-radius:9999px;padding:4px 14px;">Incluso no curso - sem custo extra</span>
         </div>
       </div>
     </div>
@@ -390,90 +517,84 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;b
 </section>
 
 <!-- MENTOR -->
-<section id="theo" class="sec" style="padding:100px 0;position:relative;overflow:hidden;">
-  <div style="position:absolute;left:-10%;top:10%;width:600px;height:600px;background:radial-gradient(circle,rgba(29,78,216,.07),transparent 70%);pointer-events:none;filter:blur(60px);"></div>
+<section id="theo" class="sec" style="padding:110px 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;left:-10%;top:10%;width:600px;height:600px;background:radial-gradient(circle,rgba(200,241,53,.03),transparent 70%);pointer-events:none;filter:blur(60px);"></div>
   <div class="ws" style="position:relative;z-index:1;">
-    <div class="rv" style="text-align:center;margin-bottom:16px;"><span class="bx bw">Seu mentor</span></div>
-    <div class="rv d1" style="text-align:center;margin-bottom:40px;">
+    <div class="rv" style="text-align:center;margin-bottom:14px;"><span class="badge badge-dim">Seu mentor</span></div>
+    <div class="rv d1" style="text-align:center;margin-bottom:44px;">
       <h2 style="font-size:clamp(2rem,3.8vw,3.2rem);font-weight:900;letter-spacing:-.05em;">
         <span class="tg">Theo Barros</span>
       </h2>
     </div>
 
-    <!-- GLASS GRID -->
     <div class="mentor-grid" style="display:grid;grid-template-columns:1fr 1.35fr;gap:16px;align-items:start;">
 
-      <!-- LEFT: Photo card -->
-      <div class="rv d1 gl" style="padding:40px 28px;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;">
+      <!-- Photo card -->
+      <div class="rv d1 glass" style="padding:40px 28px;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;">
         <div style="position:relative;display:inline-block;">
-          <div style="width:168px;height:168px;border-radius:22px;background:linear-gradient(135deg,rgba(56,189,248,.35),rgba(29,78,216,.3));padding:3px;">
+          <div style="width:168px;height:168px;border-radius:22px;background:linear-gradient(135deg,rgba(200,241,53,.3),rgba(168,230,53,.2));padding:3px;">
             <img src="https://i.postimg.cc/XjR3vRGW/theo.jpg" alt="Theo Barros" style="width:100%;height:100%;border-radius:20px;object-fit:cover;object-position:center top;display:block;">
           </div>
-          <span style="position:absolute;bottom:8px;right:8px;width:14px;height:14px;border-radius:50%;background:#22c55e;border:3px solid #02060f;box-shadow:0 0 8px #22c55e;display:block;"></span>
+          <span style="position:absolute;bottom:8px;right:8px;width:14px;height:14px;border-radius:50%;background:#22c55e;border:3px solid #0a0a0a;box-shadow:0 0 8px #22c55e;display:block;"></span>
         </div>
         <div>
-          <div style="font-size:20px;font-weight:800;color:var(--t1);letter-spacing:-.05em;margin-bottom:4px;">Theo Barros</div>
-          <div style="font-size:11px;color:var(--a);font-weight:700;letter-spacing:.06em;">ESPECIALISTA EM IA E ESCALA</div>
+          <div style="font-size:20px;font-weight:800;color:#fff;letter-spacing:-.05em;margin-bottom:5px;">Theo Barros</div>
+          <div style="font-size:11px;color:var(--lime);font-weight:700;letter-spacing:.06em;">ESPECIALISTA EM IA E ESCALA</div>
         </div>
         <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;">
-          <span class="bx ba" style="font-size:9px;"><iconify-icon icon="solar:buildings-bold" style="font-size:10px;"></iconify-icon>Alto faturamento</span>
-          <span class="bx bw" style="font-size:9px;"><iconify-icon icon="solar:users-group-rounded-bold" style="font-size:10px;"></iconify-icon>+750 alunos</span>
+          <span class="badge badge-lime" style="font-size:9px;"><iconify-icon icon="solar:buildings-bold" style="font-size:10px;"></iconify-icon>Alto faturamento</span>
+          <span class="badge badge-dim" style="font-size:9px;"><iconify-icon icon="solar:users-group-rounded-bold" style="font-size:10px;"></iconify-icon>+750 alunos</span>
         </div>
       </div>
 
-      <!-- RIGHT: 3 glass panels stacked -->
+      <!-- Right panels -->
       <div style="display:flex;flex-direction:column;gap:14px;">
-
-        <!-- Quote panel -->
-        <div class="rv d2 gl" style="padding:26px 26px;">
-          <div style="font-size:32px;color:var(--a);line-height:1;margin-bottom:8px;font-weight:900;opacity:.4;">&ldquo;</div>
+        <div class="rv d2 glass" style="padding:28px;">
+          <div style="font-size:32px;color:var(--lime);line-height:1;margin-bottom:8px;font-weight:900;opacity:.3;">&ldquo;</div>
           <p style="font-size:14px;color:var(--t2);line-height:1.78;font-style:italic;margin:0;">
-            Implementei IA em negócios de alto faturamento e decodifiquei a lógica do Claude para criar automações reais sem código. Meu método transforma empresários presos no operacional em arquitetos de negócios que escalam com IA.
+            Implementei IA em negocios de alto faturamento e decodifiquei a logica do Claude para criar automacoes reais sem codigo. Meu metodo transforma empresarios presos no operacional em arquitetos de negocios que escalam com IA.
           </p>
-          <div style="font-size:32px;color:var(--a);line-height:1;margin-top:6px;font-weight:900;opacity:.4;text-align:right;">&rdquo;</div>
+          <div style="font-size:32px;color:var(--lime);line-height:1;margin-top:6px;font-weight:900;opacity:.3;text-align:right;">&rdquo;</div>
         </div>
 
-        <!-- Stats panel -->
-        <div class="rv d3 gl" style="padding:22px 26px;">
+        <div class="rv d3 glass" style="padding:22px 26px;">
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;text-align:center;">
             <div style="padding:4px 0;">
-              <div style="font-size:22px;font-weight:900;color:var(--t1);letter-spacing:-.05em;">750+</div>
-              <div style="font-size:10px;color:var(--t3);margin-top:2px;">Alunos</div>
+              <div style="font-size:22px;font-weight:900;color:#fff;letter-spacing:-.05em;">750+</div>
+              <div style="font-size:10px;color:var(--t3);margin-top:3px;">Alunos</div>
             </div>
-            <div style="border-left:1px solid rgba(255,255,255,.06);border-right:1px solid rgba(255,255,255,.06);padding:4px 0;">
-              <div style="font-size:22px;font-weight:900;color:var(--t1);letter-spacing:-.05em;">8 dig</div>
-              <div style="font-size:10px;color:var(--t3);margin-top:2px;">Faturamento</div>
+            <div style="border-left:1px solid var(--border2);border-right:1px solid var(--border2);padding:4px 0;">
+              <div style="font-size:22px;font-weight:900;color:#fff;letter-spacing:-.05em;">8 dig</div>
+              <div style="font-size:10px;color:var(--t3);margin-top:3px;">Faturamento</div>
             </div>
             <div style="padding:4px 0;">
-              <div style="font-size:22px;font-weight:900;color:var(--t1);letter-spacing:-.05em;">5+ anos</div>
-              <div style="font-size:10px;color:var(--t3);margin-top:2px;">Com IA</div>
+              <div style="font-size:22px;font-weight:900;color:#fff;letter-spacing:-.05em;">5+ anos</div>
+              <div style="font-size:10px;color:var(--t3);margin-top:3px;">Com IA</div>
             </div>
           </div>
         </div>
 
-        <!-- Credential panel -->
-        <div class="rv d4 gl" style="padding:18px 22px;display:flex;align-items:center;gap:14px;">
-          <div style="width:40px;height:40px;border-radius:12px;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.16);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <iconify-icon icon="solar:verified-check-bold" style="font-size:20px;color:var(--a);"></iconify-icon>
+        <div class="rv d4 glass" style="padding:18px 22px;display:flex;align-items:center;gap:14px;">
+          <div style="width:40px;height:40px;border-radius:12px;background:rgba(200,241,53,.07);border:1px solid rgba(200,241,53,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <iconify-icon icon="solar:verified-check-bold" style="font-size:20px;color:var(--lime);"></iconify-icon>
           </div>
           <div>
-            <div style="font-size:13px;font-weight:700;color:var(--t1);">Método validado em +12 nichos</div>
-            <div style="font-size:11px;color:var(--t3);margin-top:2px;">De clínicas a e-commerces de alto volume</div>
+            <div style="font-size:13px;font-weight:700;color:#fff;">Metodo validado em +12 nichos</div>
+            <div style="font-size:11px;color:var(--t3);margin-top:2px;">De clinicas a e-commerces de alto volume</div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </section>
 
-<!-- DEPOIMENTOS CARROSSEL -->
-<section class="sec" style="padding:100px 0;background:rgba(5,14,35,.7);overflow:hidden;">
+<!-- DEPOIMENTOS -->
+<section class="sec" style="padding:110px 0;background:var(--bg2);overflow:hidden;">
   <div style="position:relative;z-index:1;">
-    <div class="rv wrap" style="text-align:center;margin-bottom:16px;"><span class="bx bw">Depoimentos</span></div>
-    <div class="rv d1 wrap" style="text-align:center;margin-bottom:52px;">
-      <h2 style="font-size:clamp(2rem,3.8vw,3.2rem);font-weight:800;letter-spacing:-.05em;">
-        <span class="tg">Quem já fez, conta.</span>
+    <div class="rv wrap" style="text-align:center;margin-bottom:14px;"><span class="badge badge-dim">Depoimentos</span></div>
+    <div class="rv d1 wrap" style="text-align:center;margin-bottom:56px;">
+      <h2 style="font-size:clamp(2rem,3.8vw,3.2rem);font-weight:900;letter-spacing:-.05em;">
+        <span class="tg">Quem ja fez, conta.</span>
       </h2>
     </div>
     <div class="tc-wrap">
@@ -483,68 +604,84 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;b
 </section>
 
 <!-- PRECO -->
-<section id="preco" class="sec" style="padding:100px 0;position:relative;overflow:hidden;">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(29,78,216,.1),transparent);pointer-events:none;"></div>
+<section id="preco" class="sec" style="padding:110px 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(200,241,53,.04),transparent);pointer-events:none;"></div>
   <div class="ws" style="position:relative;z-index:1;text-align:center;">
-    <div class="rv" style="margin-bottom:16px;"><span class="bx ba">Oferta por tempo limitado</span></div>
-    <div class="rv d1 gl" style="padding:48px 40px;display:inline-flex;flex-direction:column;align-items:center;gap:24px;width:100%;max-width:460px;margin-top:24px;">
+    <div class="rv" style="margin-bottom:14px;"><span class="badge badge-lime">Oferta por tempo limitado</span></div>
+    <div class="rv d1 glass" style="padding:52px 40px;display:inline-flex;flex-direction:column;align-items:center;gap:24px;width:100%;max-width:460px;margin-top:24px;">
 
-      <!-- PRECO RISCADO + BADGE destaque -->
+      <!-- Price -->
       <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
         <div style="display:flex;align-items:center;gap:10px;">
-          <span style="font-size:18px;color:#ef4444;text-decoration:line-through;font-weight:500;">R&#36; 1.890,00</span>
-          <span style="background:rgba(56,189,248,.14);border:1.5px solid rgba(56,189,248,.35);color:var(--a);font-size:12px;font-weight:800;padding:5px 13px;border-radius:100px;letter-spacing:.06em;text-transform:uppercase;">96% OFF</span>
+          <span style="font-size:17px;color:rgba(255,255,255,.3);text-decoration:line-through;font-weight:500;">R&#36; 1.890,00</span>
+          <span style="background:rgba(200,241,53,.1);border:1.5px solid rgba(200,241,53,.28);color:var(--lime);font-size:12px;font-weight:800;padding:5px 13px;border-radius:9999px;letter-spacing:.06em;text-transform:uppercase;">96% OFF</span>
         </div>
         <div style="display:flex;align-items:baseline;gap:3px;justify-content:center;line-height:1;">
-          <span style="font-size:1.4rem;color:rgba(210,228,248,.6);font-weight:600;align-self:flex-start;padding-top:9px;">R&#36;</span>
+          <span style="font-size:1.4rem;color:rgba(255,255,255,.4);font-weight:600;align-self:flex-start;padding-top:9px;">R&#36;</span>
           <span style="font-size:clamp(4.5rem,12vw,6.5rem);font-weight:900;letter-spacing:-.08em;color:#fff;">59</span>
-          <span style="font-size:1.7rem;color:rgba(210,228,248,.6);font-weight:600;align-self:flex-end;padding-bottom:12px;">,90</span>
+          <span style="font-size:1.7rem;color:rgba(255,255,255,.4);font-weight:600;align-self:flex-end;padding-bottom:12px;">,90</span>
         </div>
-        <div style="font-size:12px;color:var(--t3);letter-spacing:.04em;">Pagamento único - Acesso vitalício</div>
+        <div style="font-size:12px;color:var(--t3);letter-spacing:.04em;">Pagamento unico - Acesso vitalicio</div>
       </div>
 
+      <!-- Countdown -->
       <div style="display:flex;gap:10px;align-items:center;">
-        <div style="text-align:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:10px 14px;min-width:58px;">
-          <div id="cd-h" style="font-size:1.8rem;font-weight:800;color:var(--t1);letter-spacing:-.05em;font-variant-numeric:tabular-nums;line-height:1;">00</div>
+        <div style="text-align:center;background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:10px;padding:10px 14px;min-width:58px;">
+          <div id="cd-h" style="font-size:1.8rem;font-weight:800;color:#fff;letter-spacing:-.05em;font-variant-numeric:tabular-nums;line-height:1;">00</div>
           <div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-top:3px;">h</div>
         </div>
         <div style="font-size:1.4rem;color:var(--t4);font-weight:300;">:</div>
-        <div style="text-align:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:10px 14px;min-width:58px;">
-          <div id="cd-m" style="font-size:1.8rem;font-weight:800;color:var(--t1);letter-spacing:-.05em;font-variant-numeric:tabular-nums;line-height:1;">00</div>
+        <div style="text-align:center;background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:10px;padding:10px 14px;min-width:58px;">
+          <div id="cd-m" style="font-size:1.8rem;font-weight:800;color:#fff;letter-spacing:-.05em;font-variant-numeric:tabular-nums;line-height:1;">00</div>
           <div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-top:3px;">min</div>
         </div>
         <div style="font-size:1.4rem;color:var(--t4);font-weight:300;">:</div>
-        <div style="text-align:center;background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.14);border-radius:10px;padding:10px 14px;min-width:58px;">
-          <div id="cd-s" style="font-size:1.8rem;font-weight:800;color:var(--a);letter-spacing:-.05em;font-variant-numeric:tabular-nums;line-height:1;">00</div>
+        <div style="text-align:center;background:rgba(200,241,53,.05);border:1px solid rgba(200,241,53,.14);border-radius:10px;padding:10px 14px;min-width:58px;">
+          <div id="cd-s" style="font-size:1.8rem;font-weight:800;color:var(--lime);letter-spacing:-.05em;font-variant-numeric:tabular-nums;line-height:1;">00</div>
           <div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-top:3px;">seg</div>
         </div>
       </div>
 
-      <div style="display:grid;gap:9px;text-align:left;width:100%;border-top:1px solid rgba(255,255,255,.06);padding-top:20px;">
-        <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t2);"><iconify-icon icon="solar:check-circle-bold" style="color:var(--a);font-size:15px;flex-shrink:0;"></iconify-icon>7 módulos com acesso imediato</div>
-        <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t2);"><iconify-icon icon="solar:gift-bold" style="color:#facc15;font-size:15px;flex-shrink:0;"></iconify-icon><span><strong style="color:#facc15;">BÔNUS:</strong> Instalador + 5 robôs prontos</span></div>
-        <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t2);"><iconify-icon icon="solar:check-circle-bold" style="color:var(--a);font-size:15px;flex-shrink:0;"></iconify-icon>Templates prontos de prompts para usar hoje</div>
-        <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t2);"><iconify-icon icon="solar:check-circle-bold" style="color:var(--a);font-size:15px;flex-shrink:0;"></iconify-icon>Acesso a comunidade de alunos</div>
-        <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t2);"><iconify-icon icon="solar:check-circle-bold" style="color:var(--a);font-size:15px;flex-shrink:0;"></iconify-icon>Garantia de 7 dias ou devolução total</div>
-        <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t2);"><iconify-icon icon="solar:check-circle-bold" style="color:var(--a);font-size:15px;flex-shrink:0;"></iconify-icon>Atualizações gratuitas para sempre</div>
+      <!-- Checklist -->
+      <div style="display:grid;gap:9px;text-align:left;width:100%;border-top:1px solid var(--border2);padding-top:20px;">
+        <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t2);">
+          <iconify-icon icon="solar:check-circle-bold" style="color:var(--lime);font-size:15px;flex-shrink:0;"></iconify-icon>7 modulos com acesso imediato
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t2);">
+          <iconify-icon icon="solar:gift-bold" style="color:var(--lime);font-size:15px;flex-shrink:0;"></iconify-icon>
+          <span><strong style="color:var(--lime);">BONUS:</strong> Instalador + 5 robos prontos</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t2);">
+          <iconify-icon icon="solar:check-circle-bold" style="color:var(--lime);font-size:15px;flex-shrink:0;"></iconify-icon>Templates prontos de prompts para usar hoje
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t2);">
+          <iconify-icon icon="solar:check-circle-bold" style="color:var(--lime);font-size:15px;flex-shrink:0;"></iconify-icon>Acesso a comunidade de alunos
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t2);">
+          <iconify-icon icon="solar:check-circle-bold" style="color:var(--lime);font-size:15px;flex-shrink:0;"></iconify-icon>Garantia de 7 dias ou devolucao total
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t2);">
+          <iconify-icon icon="solar:check-circle-bold" style="color:var(--lime);font-size:15px;flex-shrink:0;"></iconify-icon>Atualizacoes gratuitas para sempre
+        </div>
       </div>
-      <a href="https://pay.kiwify.com.br/tIgbS7O" class="btn bp" style="width:100%;padding:19px 28px;font-size:15px;">
-        QUERO COMEÇAR
+
+      <a href="https://pay.kiwify.com.br/tIgbS7O" class="btn btn-lime" style="width:100%;padding:19px 28px;font-size:15px;">
+        QUERO COMECAR
         <iconify-icon icon="solar:arrow-right-bold" style="font-size:17px;"></iconify-icon>
       </a>
       <div style="font-size:11px;color:var(--t3);display:flex;align-items:center;gap:6px;">
-        <iconify-icon icon="solar:shield-check-bold" style="color:var(--a);font-size:13px;"></iconify-icon>Compra 100% segura - Garantia incondicional de 7 dias
+        <iconify-icon icon="solar:shield-check-bold" style="color:var(--lime);font-size:13px;"></iconify-icon>Compra 100% segura - Garantia incondicional de 7 dias
       </div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="sec" style="padding:100px 0;background:rgba(5,14,35,.7);">
+<section class="sec" style="padding:110px 0;background:var(--bg2);">
   <div class="ws" style="position:relative;z-index:1;">
-    <div class="rv" style="text-align:center;margin-bottom:16px;"><span class="bx bw">Dúvidas</span></div>
-    <div class="rv d1" style="text-align:center;margin-bottom:44px;">
-      <h2 style="font-size:clamp(2rem,3.8vw,3.2rem);font-weight:800;letter-spacing:-.05em;">
+    <div class="rv" style="text-align:center;margin-bottom:14px;"><span class="badge badge-dim">Duvidas</span></div>
+    <div class="rv d1" style="text-align:center;margin-bottom:48px;">
+      <h2 style="font-size:clamp(2rem,3.8vw,3.2rem);font-weight:900;letter-spacing:-.05em;">
         <span class="tg">Perguntas frequentes</span>
       </h2>
     </div>
@@ -554,20 +691,20 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;b
 
 <!-- CTA FINAL -->
 <section class="sec" style="padding:120px 0 160px;position:relative;overflow:hidden;">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 60%,rgba(29,78,216,.12),transparent);pointer-events:none;"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 60%,rgba(200,241,53,.05),transparent);pointer-events:none;"></div>
   <div class="ws" style="position:relative;z-index:1;text-align:center;">
-    <div class="rv" style="margin-bottom:24px;">
-      <h2 style="font-size:clamp(2.2rem,4vw,3.6rem);font-weight:900;letter-spacing:-.06em;line-height:1.02;margin-bottom:14px;">
-        <span class="tg">Seu negócio pode funcionar</span><br>
-        <span class="ta">enquanto você dorme.</span>
+    <div class="rv" style="margin-bottom:28px;">
+      <h2 style="font-size:clamp(2.2rem,4vw,3.8rem);font-weight:900;letter-spacing:-.06em;line-height:1.0;margin-bottom:16px;">
+        <span class="tg">Seu negocio pode funcionar</span><br>
+        <span class="tl">enquanto voce dorme.</span>
       </h2>
       <p style="font-size:clamp(14px,1.8vw,17px);color:var(--t2);max-width:400px;margin:0 auto;line-height:1.72;">
-        +750 empreendedores já criaram seus robôs de IA. Hoje por R&#36;59,90.
+        +750 empreendedores ja criaram seus robos de IA. Hoje por R&#36;59,90.
       </p>
     </div>
     <div class="rv d1" style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-      <a href="https://pay.kiwify.com.br/tIgbS7O" class="btn bp" style="padding:20px 44px;font-size:16px;">
-        COMEÇAR AGORA · R&#36;59,90
+      <a href="https://pay.kiwify.com.br/tIgbS7O" class="btn btn-lime" style="padding:20px 48px;font-size:16px;">
+        COMECAR AGORA · R&#36;59,90
         <iconify-icon icon="solar:arrow-right-bold" style="font-size:19px;"></iconify-icon>
       </a>
       <span style="font-size:12px;color:var(--t3);">Garantia de 7 dias. Acesso imediato.</span>
@@ -576,9 +713,9 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;b
 </section>
 
 <!-- FOOTER -->
-<footer class="sec" style="border-top:1px solid rgba(255,255,255,.05);padding:24px 0;background:rgba(5,14,35,.8);">
+<footer class="sec" style="border-top:1px solid var(--border2);padding:24px 0;background:rgba(255,255,255,.01);">
   <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-    <span style="font-size:12px;color:var(--t3);">2025 Crie Seu Robô - Todos os direitos reservados</span>
+    <span style="font-size:12px;color:var(--t3);">2025 Crie Seu Robo - Todos os direitos reservados</span>
     <div style="display:flex;gap:20px;">
       <a href="#" style="font-size:12px;color:var(--t3);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--t2)'" onmouseout="this.style.color='var(--t3)'">Privacidade</a>
       <a href="#" style="font-size:12px;color:var(--t3);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--t2)'" onmouseout="this.style.color='var(--t3)'">Termos</a>
@@ -589,65 +726,57 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;b
 <!-- STICKY MOBILE -->
 <div id="sb">
   <div style="display:flex;flex-direction:column;gap:1px;">
-    <span style="font-size:10px;color:#ef4444;text-decoration:line-through;font-weight:400;">R&#36; 1.890</span>
+    <span style="font-size:10px;color:rgba(255,255,255,.3);text-decoration:line-through;font-weight:400;">R&#36; 1.890</span>
     <div style="display:flex;align-items:baseline;gap:2px;line-height:1;">
-      <span style="font-size:10px;color:rgba(210,228,248,.5);font-weight:600;">R&#36;</span>
+      <span style="font-size:10px;color:rgba(255,255,255,.4);font-weight:600;">R&#36;</span>
       <span style="font-size:26px;font-weight:900;color:#fff;letter-spacing:-.05em;">59</span>
-      <span style="font-size:13px;color:rgba(210,228,248,.5);font-weight:600;">,90</span>
+      <span style="font-size:13px;color:rgba(255,255,255,.4);font-weight:600;">,90</span>
     </div>
   </div>
-  <a href="https://pay.kiwify.com.br/tIgbS7O" class="btn bp" style="padding:13px 22px;font-size:14px;flex-shrink:0;">
+  <a href="https://pay.kiwify.com.br/tIgbS7O" class="btn btn-lime" style="padding:13px 22px;font-size:14px;flex-shrink:0;">
     QUERO APRENDER
     <iconify-icon icon="solar:arrow-right-bold" style="font-size:15px;"></iconify-icon>
   </a>
 </div>
 
 <script>
-// PARTICLES
-(function(){
-  const c=document.getElementById('pc');if(!c)return;
-  const ctx=c.getContext('2d');let pts=[],W,H;
-  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;init();}
-  function init(){pts=[];const n=Math.floor(W*H/7000);for(let i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.2,vx:(Math.random()-.5)*.15,vy:-(Math.random()*.35+.05),o:Math.random()*.35+.04});}
-  function draw(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(56,189,248,'+p.o+')';ctx.fill();p.x+=p.vx;p.y+=p.vy;if(p.y<-4){p.y=H+4;p.x=Math.random()*W;}if(p.x<-4||p.x>W+4)p.x=Math.random()*W;});requestAnimationFrame(draw);}
-  resize();draw();window.addEventListener('resize',resize,{passive:true});
-})();
-
-// REVEAL
-const rvObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvObs.unobserve(e.target);}});},{threshold:.06});
+// REVEAL ON SCROLL
+const rvObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvObs.unobserve(e.target);}});
+},{threshold:.06});
 document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
 
-// HEADER + ONLINE
-const hdr=document.getElementById('hdr');
-let base=137;const cntEl=document.getElementById('cnt');
-setInterval(()=>{base+=Math.floor(Math.random()*7)-3;base=Math.max(110,Math.min(195,base));if(cntEl)cntEl.textContent=base;},4200);
+// HEADER ONLINE COUNTER
+let base=124;const cntEl=document.getElementById('cnt');
+setInterval(()=>{base+=Math.floor(Math.random()*7)-3;base=Math.max(95,Math.min(200,base));if(cntEl)cntEl.textContent=base;},4200);
 
 // STICKY MOBILE
 const sb=document.getElementById('sb');let sbShown=false;
 window.addEventListener('scroll',()=>{if(scrollY>280&&!sbShown){sbShown=true;sb.classList.add('show');}},{passive:true});
 
-// PANEL — usando icones bold para carregarem na hora
+// AGENT PANEL
 const taskDefs=[
-  {icon:'solar:letter-bold',label:'Respondendo mensagens',tag:'Automatizado',done:true},
-  {icon:'solar:chart-bold',label:'Analisando campanhas',tag:'Automatizado',done:true},
-  {icon:'solar:bag-bold',label:'Processando vendas',tag:'Em andamento',done:false,active:true,progress:58},
-  {icon:'solar:box-bold',label:'Gestão de estoque',tag:'Na fila',done:false},
+  {icon:'solar:letter-bold',label:'Agente Vendedor ativo',tag:'Qualificando Leads',done:true},
+  {icon:'solar:chart-bold',label:'Gestor de Trafego',tag:'Otimizando ROAS Meta',done:true},
+  {icon:'solar:bag-bold',label:'Suporte N1',tag:'Em andamento',done:false,active:true,progress:58},
+  {icon:'solar:inbox-bold',label:'Analisador de Dados',tag:'Na fila',done:false},
 ];
 function renderPanel(){
   const list=document.getElementById('auto-list');if(!list)return;list.innerHTML='';
   taskDefs.forEach((t,i)=>{
     const row=document.createElement('div');
-    row.style.cssText=`padding:9px 12px;border-radius:10px;background:${t.done?'rgba(56,189,248,.03)':t.active?'rgba(255,255,255,.02)':'transparent'};border:1px solid ${t.done?'rgba(56,189,248,.08)':t.active?'rgba(255,255,255,.06)':'transparent'};display:flex;align-items:center;gap:10px;position:relative;overflow:hidden;${t.active?'animation:taskDone 2s ease-in-out;':i>=2?'animation:slideIn .4s ease both;animation-delay:'+(i*.1)+'s;':''}`;
-    if(t.active){const sc=document.createElement('div');sc.style.cssText='position:absolute;top:0;left:0;width:28%;height:100%;background:linear-gradient(90deg,transparent,rgba(56,189,248,.04),transparent);animation:scanLine 2.4s linear infinite;';row.appendChild(sc);}
+    const limeColor='rgba(200,241,53,';
+    row.style.cssText=`padding:9px 12px;border-radius:10px;background:${t.done?limeColor+'0.03)':t.active?'rgba(255,255,255,.02)':'transparent'};border:1px solid ${t.done?limeColor+'0.1)':t.active?'rgba(255,255,255,.06)':'transparent'};display:flex;align-items:center;gap:10px;position:relative;overflow:hidden;${t.active?'animation:taskDone 2s ease-in-out;':i>=2?'animation:slideIn .4s ease both;animation-delay:'+(i*.1)+'s;':''}`;
+    if(t.active){const sc=document.createElement('div');sc.style.cssText='position:absolute;top:0;left:0;width:28%;height:100%;background:linear-gradient(90deg,transparent,rgba(200,241,53,.03),transparent);animation:scanLine 2.4s linear infinite;';row.appendChild(sc);}
     row.innerHTML+=`
-      <div style="width:26px;height:26px;border-radius:8px;background:${t.done?'rgba(56,189,248,.08)':'rgba(255,255,255,.04)'};border:1px solid ${t.done?'rgba(56,189,248,.15)':'rgba(255,255,255,.07)'};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-        <iconify-icon icon="${t.icon}" style="font-size:13px;color:${t.done?'var(--a)':'rgba(255,255,255,.28)'};"></iconify-icon>
+      <div style="width:26px;height:26px;border-radius:8px;background:${t.done?limeColor+'0.08)':'rgba(255,255,255,.04)'};border:1px solid ${t.done?limeColor+'0.16)':'rgba(255,255,255,.07)'};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <iconify-icon icon="${t.icon}" style="font-size:13px;color:${t.done?'var(--lime)':'rgba(255,255,255,.28)'};"></iconify-icon>
       </div>
       <div style="flex:1;min-width:0;">
         <div style="font-size:11px;font-weight:500;color:${t.done?'rgba(255,255,255,.78)':t.active?'rgba(255,255,255,.6)':'rgba(255,255,255,.24)'};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${t.label}</div>
-        ${t.active?`<div style="margin-top:4px;height:2px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden;"><div id="prog-bar" style="height:100%;width:${t.progress}%;background:linear-gradient(90deg,#1d4ed8,#38bdf8);border-radius:2px;transition:width .8s ease;"></div></div>`:''}
+        ${t.active?`<div style="margin-top:4px;height:2px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden;"><div id="prog-bar" style="height:100%;width:${t.progress}%;background:linear-gradient(90deg,#8db827,var(--lime));border-radius:2px;transition:width .8s ease;"></div></div>`:''}
       </div>
-      <span style="font-size:10px;padding:2px 7px;border-radius:100px;background:${t.done?'rgba(56,189,248,.07)':t.active?'rgba(255,255,255,.04)':'transparent'};border:1px solid ${t.done?'rgba(56,189,248,.14)':t.active?'rgba(255,255,255,.06)':'transparent'};color:${t.done?'var(--a)':t.active?'rgba(255,255,255,.4)':'rgba(255,255,255,.16)'};white-space:nowrap;">${t.done?'&#10003; ':''}${t.tag}</span>`;
+      <span style="font-size:10px;padding:2px 7px;border-radius:9999px;background:${t.done?limeColor+'0.07)':t.active?'rgba(255,255,255,.04)':'transparent'};border:1px solid ${t.done?limeColor+'0.15)':t.active?'rgba(255,255,255,.06)':'transparent'};color:${t.done?'var(--lime)':t.active?'rgba(255,255,255,.4)':'rgba(255,255,255,.16)'};white-space:nowrap;">${t.tag}</span>`;
     list.appendChild(row);
   });
 }
@@ -655,63 +784,71 @@ renderPanel();
 let prog=58;
 const progInt=setInterval(()=>{
   prog=Math.min(100,prog+.9);const bar=document.getElementById('prog-bar');if(bar)bar.style.width=prog+'%';
-  if(prog>=100){clearInterval(progInt);setTimeout(()=>{const a=taskDefs.find(t=>t.active);if(a){a.done=true;a.active=false;a.tag='Automatizado';}const n=taskDefs.find(t=>!t.done&&!t.active);if(n){n.active=true;n.progress=0;}renderPanel();},600);}
+  if(prog>=100){clearInterval(progInt);setTimeout(()=>{const a=taskDefs.find(t=>t.active);if(a){a.done=true;a.active=false;a.tag='Concluido';}const n=taskDefs.find(t=>!t.done&&!t.active);if(n){n.active=true;n.progress=0;}renderPanel();},600);}
 },80);
 let mins=4*60+12;const tsEl=document.getElementById('time-saved');
 setInterval(()=>{mins++;if(tsEl)tsEl.textContent=Math.floor(mins/60)+'h '+(mins%60)+'min';},30000);
 
 // STATS COUNTER
-function animCount(el,target,suffix){const dur=1800,start=performance.now();const go=now=>{const e=1-Math.pow(1-Math.min(1,(now-start)/dur),4);el.textContent=Math.round(e*target)+(suffix||'');if(e<1)requestAnimationFrame(go);};requestAnimationFrame(go);}
-const scObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,t=parseInt(el.dataset.target);if(!isNaN(t))animCount(el,t,el.dataset.suffix||'');scObs.unobserve(el);});},{threshold:.5});
+function animCount(el,target,suffix){
+  const dur=1800,start=performance.now();
+  const go=now=>{const e=1-Math.pow(1-Math.min(1,(now-start)/dur),4);el.textContent=Math.round(e*target)+(suffix||'');if(e<1)requestAnimationFrame(go);};
+  requestAnimationFrame(go);
+}
+const scObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,t=parseInt(el.dataset.target);if(!isNaN(t))animCount(el,t,el.dataset.suffix||'');scObs.unobserve(el);});
+},{threshold:.5});
 document.querySelectorAll('.sc').forEach(el=>scObs.observe(el));
 
 // MODULES
 const mods=[
-  {n:'01',title:'O que é o Claude e por que ele é diferente',tags:['Conceito']},
-  {n:'02',title:'Configurando seu assistente do zero',tags:['Prático']},
-  {n:'03',title:'Ensinando o robô a falar pelo seu negócio',tags:['Prático']},
-  {n:'04',title:'Atendimento automático 24h',tags:['Implementação']},
-  {n:'05',title:'Análise de dados e relatórios com IA',tags:['Avançado']},
-  {n:'06',title:'Integração com WhatsApp e Instagram',tags:['Integração']},
-  {n:'07',title:'Escalando e ajustando seu robô',tags:['Escala']},
+  {n:'01',title:'O que e o Claude e por que ele e diferente',tags:['Conceito']},
+  {n:'02',title:'Configurando seu assistente do zero',tags:['Pratico']},
+  {n:'03',title:'Ensinando o robo a falar pelo seu negocio',tags:['Pratico']},
+  {n:'04',title:'Atendimento automatico 24h',tags:['Implementacao']},
+  {n:'05',title:'Analise de dados e relatorios com IA',tags:['Avancado']},
+  {n:'06',title:'Integracao com WhatsApp e Instagram',tags:['Integracao']},
+  {n:'07',title:'Escalando e ajustando seu robo',tags:['Escala']},
 ];
 const modList=document.getElementById('mod-list');
 if(modList){mods.forEach((m,i)=>{
   const el=document.createElement('div');
-  el.className='rv g'+(i>0?' d'+Math.min(i,4):'');
+  el.className='rv card'+(i>0?' d'+Math.min(i,4):'');
   el.style.cssText='padding:16px 22px;display:flex;align-items:center;gap:14px;';
   el.innerHTML=`
-    <div style="width:34px;height:34px;border-radius:10px;background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.12);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--a);flex-shrink:0;">${m.n}</div>
-    <div style="flex:1;font-size:14px;font-weight:600;color:var(--t1);letter-spacing:-.02em;">${m.title}</div>
-    <div style="display:flex;gap:5px;flex-shrink:0;">${m.tags.map(t=>`<span style="font-size:10px;padding:3px 9px;border-radius:100px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--t3);font-weight:500;">${t}</span>`).join('')}</div>`;
+    <div style="width:34px;height:34px;border-radius:10px;background:rgba(200,241,53,.06);border:1px solid rgba(200,241,53,.12);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--lime);flex-shrink:0;">${m.n}</div>
+    <div style="flex:1;font-size:14px;font-weight:600;color:#fff;letter-spacing:-.02em;">${m.title}</div>
+    <div style="display:flex;gap:5px;flex-shrink:0;">${m.tags.map(t=>`<span style="font-size:10px;padding:3px 9px;border-radius:9999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--t3);font-weight:500;">${t}</span>`).join('')}</div>`;
   modList.appendChild(el);rvObs.observe(el);
 });}
 
-// TESTIMONIALS CAROUSEL
+// TESTIMONIALS
 const testimonials=[
-  {name:'Marina S.',role:'Loja de roupas',text:'Montei meu assistente em 1 hora e ele já respondeu mais de 200 clientes essa semana. Inacreditável.',avatar:'M',grad:'linear-gradient(135deg,#1d4ed8,#38bdf8)'},
-  {name:'Carlos M.',role:'Prestador de serviços',text:'Economizei 3 horas por dia só no atendimento. O curso pagou o retorno em 2 dias.',avatar:'C',grad:'linear-gradient(135deg,#059669,#34d399)'},
-  {name:'Ana P.',role:'Confeitaria artesanal',text:'Achei que precisaria saber programar. Não precisei de nada. O Theo explica do zero.',avatar:'A',grad:'linear-gradient(135deg,#7c3aed,#a78bfa)'},
-  {name:'Rafael T.',role:'Agencia de marketing',text:'Automatizei relatórios que levavam 2h e agora saem em segundos. Meus clientes adoraram.',avatar:'R',grad:'linear-gradient(135deg,#c2410c,#fb923c)'},
-  {name:'Juliana F.',role:'Clínica odontológica',text:'Reduzi 80% das mensagens repetitivas no WhatsApp. O robô responde melhor do que eu.',avatar:'J',grad:'linear-gradient(135deg,#0e7490,#22d3ee)'},
-  {name:'Lucas B.',role:'E-commerce de suplementos',text:'Já testei vários cursos de IA. Esse é o único que funciona de verdade para quem tem negócio.',avatar:'L',grad:'linear-gradient(135deg,#be185d,#f472b6)'},
+  {name:'Marina S.',role:'Loja de roupas',text:'Montei meu assistente em 1 hora e ele ja respondeu mais de 200 clientes essa semana. Inacreditavel.',avatar:'M',grad:'linear-gradient(135deg,#4a5c1a,#c8f135)'},
+  {name:'Carlos M.',role:'Prestador de servicos',text:'Economizei 3 horas por dia so no atendimento. O curso pagou o retorno em 2 dias.',avatar:'C',grad:'linear-gradient(135deg,#059669,#34d399)'},
+  {name:'Ana P.',role:'Confeitaria artesanal',text:'Achei que precisaria saber programar. Nao precisei de nada. O Theo explica do zero.',avatar:'A',grad:'linear-gradient(135deg,#7c3aed,#a78bfa)'},
+  {name:'Rafael T.',role:'Agencia de marketing',text:'Automatizei relatorios que levavam 2h e agora saem em segundos. Meus clientes adoraram.',avatar:'R',grad:'linear-gradient(135deg,#c2410c,#fb923c)'},
+  {name:'Juliana F.',role:'Clinica odontologica',text:'Reduzi 80% das mensagens repetitivas no WhatsApp. O robo responde melhor do que eu.',avatar:'J',grad:'linear-gradient(135deg,#0e7490,#22d3ee)'},
+  {name:'Lucas B.',role:'E-commerce de suplementos',text:'Ja testei varios cursos de IA. Esse e o unico que funciona de verdade para quem tem negocio.',avatar:'L',grad:'linear-gradient(135deg,#be185d,#f472b6)'},
 ];
 function buildTestimonials(){
   const track=document.getElementById('tc-track');if(!track)return;
   const all=[...testimonials,...testimonials];
   all.forEach(t=>{
     const card=document.createElement('div');
-    card.style.cssText='background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:26px;width:300px;flex-shrink:0;';
+    card.style.cssText='background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:26px;width:300px;flex-shrink:0;transition:border-color .2s;';
+    card.onmouseenter=()=>{card.style.borderColor='rgba(200,241,53,.14)';};
+    card.onmouseleave=()=>{card.style.borderColor='rgba(255,255,255,.07)';};
     card.innerHTML=`
       <div style="display:flex;gap:2px;margin-bottom:14px;">
-        ${'<svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'.repeat(5)}
+        ${'<svg width="13" height="13" viewBox="0 0 24 24" fill="#c8f135"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'.repeat(5)}
       </div>
-      <p style="font-size:14px;color:rgba(210,228,248,.62);line-height:1.72;margin-bottom:18px;">"${t.text}"</p>
+      <p style="font-size:13px;color:rgba(255,255,255,.55);line-height:1.74;margin-bottom:18px;">"${t.text}"</p>
       <div style="display:flex;align-items:center;gap:10px;">
         <div style="width:36px;height:36px;border-radius:50%;background:${t.grad};display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;">${t.avatar}</div>
         <div>
-          <div style="font-size:13px;font-weight:700;color:#eef4fc;">${t.name}</div>
-          <div style="font-size:11px;color:rgba(210,228,248,.35);">${t.role}</div>
+          <div style="font-size:13px;font-weight:700;color:#fff;">${t.name}</div>
+          <div style="font-size:11px;color:var(--t3);">${t.role}</div>
         </div>
       </div>`;
     track.appendChild(card);
@@ -721,20 +858,20 @@ buildTestimonials();
 
 // FAQ
 const faqs=[
-  {q:'Preciso saber programar?',a:'Não. Zero código. Você configura tudo em texto, como uma conversa.'},
-  {q:'Tem mensalidade para usar o Claude?',a:'O plano gratuito já funciona para começar. O plano pago custa cerca de R$100 por mês e e opcional.'},
-  {q:'Quanto tempo até ter o robô funcionando?',a:'Menos de 1 hora. A maioria dos alunos sai da primeira aula prática com algo rodando.'},
-  {q:'Funciona para qualquer negócio?',a:'Sim. Loja online, serviços, consultorio, restaurante. Se tem clientes e tarefas repetitivas, o robô serve.'},
-  {q:'E se eu não gostar?',a:'7 dias de garantia. Pediu o reembolso, devolvemos 100% sem perguntas.'},
+  {q:'Preciso saber programar?',a:'Nao. Zero codigo. Voce configura tudo em texto, como uma conversa.'},
+  {q:'Tem mensalidade para usar o Claude?',a:'O plano gratuito ja funciona para comecar. O plano pago custa cerca de R$100 por mes e e opcional.'},
+  {q:'Quanto tempo ate ter o robo funcionando?',a:'Menos de 1 hora. A maioria dos alunos sai da primeira aula pratica com algo rodando.'},
+  {q:'Funciona para qualquer negocio?',a:'Sim. Loja online, servicos, consultorio, restaurante. Se tem clientes e tarefas repetitivas, o robo serve.'},
+  {q:'E se eu nao gostar?',a:'7 dias de garantia. Pediu o reembolso, devolvemos 100% sem perguntas.'},
 ];
 const faqEl=document.getElementById('faq');
 if(faqEl){faqs.forEach((f,i)=>{
   const item=document.createElement('div');
-  item.className='rv g'+(i>0?' d'+Math.min(i,4):'');
+  item.className='rv card'+(i>0?' d'+Math.min(i,4):'');
   item.style.cssText='overflow:hidden;';
   item.innerHTML=`
-    <button onclick="const b=this.nextElementSibling,ic=this.querySelector('.ai');b.classList.toggle('open');ic.classList.toggle('open');this.parentElement.style.borderColor=b.classList.contains('open')?'rgba(56,189,248,.2)':'var(--gbd)';" style="width:100%;padding:18px 20px;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;">
-      <span style="font-size:14px;font-weight:600;color:var(--t1);letter-spacing:-.02em;">${f.q}</span>
+    <button onclick="const b=this.nextElementSibling,ic=this.querySelector('.ai');b.classList.toggle('open');ic.classList.toggle('open');this.parentElement.style.borderColor=b.classList.contains('open')?'rgba(200,241,53,.2)':'rgba(255,255,255,.05)';" style="width:100%;padding:18px 20px;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;">
+      <span style="font-size:14px;font-weight:600;color:#fff;letter-spacing:-.02em;">${f.q}</span>
       <iconify-icon icon="solar:alt-arrow-down-linear" class="ai" style="font-size:17px;color:var(--t3);"></iconify-icon>
     </button>
     <div class="ab" style="padding:0 20px;">
@@ -745,10 +882,17 @@ if(faqEl){faqs.forEach((f,i)=>{
 
 // COUNTDOWN
 (function(){
-  const k='cdEnd3';let end=localStorage.getItem(k);
+  const k='cdEndLime';let end=localStorage.getItem(k);
   if(!end||Date.now()>+end){end=Date.now()+(23*3600+Math.floor(Math.random()*3600))*1000;localStorage.setItem(k,end);}
   const pad=n=>String(n).padStart(2,'0');
-  const tick=()=>{const d=Math.max(0,+end-Date.now());const hEl=document.getElementById('cd-h'),mEl=document.getElementById('cd-m'),sEl=document.getElementById('cd-s');if(hEl)hEl.textContent=pad(Math.floor(d/3600000));if(mEl)mEl.textContent=pad(Math.floor(d%3600000/60000));if(sEl)sEl.textContent=pad(Math.floor(d%60000/1000));if(d>0)setTimeout(tick,1000);};tick();
+  const tick=()=>{
+    const d=Math.max(0,+end-Date.now());
+    const hEl=document.getElementById('cd-h'),mEl=document.getElementById('cd-m'),sEl=document.getElementById('cd-s');
+    if(hEl)hEl.textContent=pad(Math.floor(d/3600000));
+    if(mEl)mEl.textContent=pad(Math.floor(d%3600000/60000));
+    if(sEl)sEl.textContent=pad(Math.floor(d%60000/1000));
+    if(d>0)setTimeout(tick,1000);
+  };tick();
 })();
 </script>
 </body>
